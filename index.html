@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Plan Tracker</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --light-color: #ecf0f1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .controls-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 20px;
+            background-color: #3d3d3d;
+            border-radius: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        #resetAll {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #resetAll:hover {
+            background-color: #c0392b;
+        }
+
+        .notes-section {
+            background-color: #2d2d2d;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        #workoutNotes {
+            width: 100%;
+            height: 100px;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #3d3d3d;
+            border: 1px solid #4a4a4a;
+            border-radius: 5px;
+            color: white;
+            resize: vertical;
+        }
+
+        #saveNotes {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #saveNotes:hover {
+            background-color: #2980b9;
+        }
+
+        .day-card {
+            background-color: #2d2d2d;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .color-code {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .session {
+            margin-bottom: 20px;
+        }
+
+        .session h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .exercise {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            margin-bottom: 5px;
+            background-color: #3d3d3d;
+            border-radius: 5px;
+        }
+
+        .exercise input {
+            margin-right: 10px;
+        }
+
+        .completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        /* Color coding for days */
+        .monday { background-color: #e74c3c; }
+        .tuesday { background-color: #2ecc71; }
+        .wednesday { background-color: #f1c40f; }
+        .thursday { background-color: #3498db; }
+        .friday { background-color: #e67e22; }
+        .saturday { background-color: #9b59b6; }
+        .sunday { background-color: #95a5a6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💪 Workout Plan Tracker</h1>
+        
+        <div class="controls-section">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <button id="resetAll">Reset All Exercises</button>
+        </div>
+
+        <div class="notes-section">
+            <h3>Workout Notes</h3>
+            <textarea id="workoutNotes" placeholder="Write your notes here..."></textarea>
+            <button id="saveNotes">Save Notes</button>
+        </div>
+        
+        <div id="workoutDays"></div>
+    </div>
+
+    <script>
+       const workoutPlan = [
+            {
+                day: "🔴 Monday: Chest & Triceps",
+                colorClass: "monday",
+                sessions: [
+                    {
+                        time: "✅ Morning (Cardio & Light Activation)",
+                        exercises: [
+                            "🚶 15 min treadmill incline walk (3.5 speed, 10-15 incline)",
+                            "🏋️ Cable Chest Fly (3 x 15, light weight)",
+                            "🏋️ Rope Triceps Pushdown (3 x 15, light weight)",
+                            "🏋️ Plank (3 x 30 sec)"
+                        ]
+                    },
+                    {
+                        time: "✅ Night (Heavy Lifting - Strength & Size)",
+                        exercises: [
+                            "🏋️ Barbell Bench Press (4 x 8-12)",
+                            "🏋️ Incline Dumbbell Press (4 x 10)",
+                            "🏋️ Chest Press Machine (3 x 12)",
+                            "🏋️ Triceps Dips (3 x 8-12)",
+                            "🏋️ Overhead Dumbbell Triceps Extension (3 x 12)"
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "🟢 Tuesday: Back & Biceps",
+                colorClass: "tuesday",
+                sessions: [
+                    {
+                        time: "✅ Morning (Cardio & Mobility Work)",
+                        exercises: [
+                            "🚴 15 min stationary bike (medium resistance)",
+                            "🏋️ Face Pulls (3 x 15, light weight)",
+                            "🏋️ Hanging Leg Raises (3 x 12)"
+                        ]
+                    },
+                    {
+                        time: "✅ Night (Heavy Lifting - Strength & Size)",
+                        exercises: [
+                            "🏋️ Lat Pulldown (4 x 8-12)",
+                            "🏋️ Seated Row (4 x 10)",
+                            "🏋️ Pull-Ups (3 x 6-12)",
+                            "🏋️ Dumbbell Bicep Curls (3 x 12-15)",
+                            "🏋️ Hammer Curls (3 x 10-12)"
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "🟡 Wednesday: Legs & Core",
+                colorClass: "wednesday",
+                sessions: [
+                    {
+                        time: "✅ Morning (Cardio & Mobility)",
+                        exercises: [
+                            "🚶 15 min incline treadmill walk",
+                            "🏋️ Hanging Leg Raises (3 x 12)",
+                            "🏋️ Cable Woodchoppers (3 x 12 per side)"
+                        ]
+                    },
+                    {
+                        time: "✅ Night (Heavy Lifting - Leg Day)",
+                        exercises: [
+                            "🏋️ Squats (4 x 8-12)",
+                            "🏋️ Leg Press (4 x 10)",
+                            "🏋️ Romanian Deadlifts (3 x 12)",
+                            "🏋️ Seated Leg Curl (3 x 12-15)",
+                            "🏋️ Calf Raises (3 x 15)"
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "🔵 Thursday: Shoulders & Abs",
+                colorClass: "thursday",
+                sessions: [
+                    {
+                        time: "✅ Morning (Cardio & Activation Work)",
+                        exercises: [
+                            "🚴 15 min stationary bike",
+                            "🏋️ Lateral Raises (3 x 15, light weight)",
+                            "🏋️ Russian Twists (3 x 15 per side)"
+                        ]
+                    },
+                    {
+                        time: "✅ Night (Heavy Shoulder Work)",
+                        exercises: [
+                            "🏋️ Seated Shoulder Press (4 x 10)",
+                            "🏋️ Arnold Press (3 x 12)",
+                            "🏋️ Reverse Pec Deck (3 x 12)",
+                            "🏋️ Shrugs (3 x 12)"
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "🟠 Friday: Full Body Power & Explosiveness",
+                colorClass: "friday",
+                sessions: [
+                    {
+                        time: "✅ Morning (Cardio & Agility Work)",
+                        exercises: [
+                            "🚶 10 min treadmill jog",
+                            "🏋️ Jump Rope (3 x 30 sec)",
+                            "🏋️ Battle Ropes (3 x 30 sec)"
+                        ]
+                    },
+                    {
+                        time: "✅ Night (Heavy Compound Movements)",
+                        exercises: [
+                            "🏋️ Deadlifts (4 x 6-8)",
+                            "🏋️ Kettlebell Swings (3 x 15)",
+                            "🏋️ Sled Push (or Farmer’s Walk) (3 x 20m)",
+                            "🏋️ Box Jumps (3 x 12)",
+                            "🏋️ Ab Rollouts (3 x 12)"
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "🟣 Saturday: Arms & Chest Pump",
+                colorClass: "saturday",
+                sessions: [
+                    {
+                        time: "✅ Morning (Cardio & Light Work)",
+                        exercises: [
+                            "🚴 15 min stationary bike",
+                            "🏋️ Preacher Curls (3 x 15, light)"
+                        ]
+                    },
+                    {
+                        time: "✅ Night (Heavy Isolation & Pump Focus)",
+                        exercises: [
+                            "🏋️ Preacher Curls (3 x 12-15)",
+                            "🏋️ Triceps Kickbacks (3 x 12)",
+                            "🏋️ Dumbbell Flys (3 x 12)",
+                            "🏋️ Chest Press Machine (3 x 12-15)",
+                            "🏋️ Cable Crossovers (3 x 15)"
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "🟤 Sunday: Active Recovery",
+                colorClass: "sunday",
+                sessions: [
+                    {
+                        time: "✅ Morning (Cardio & Recovery Work)",
+                        exercises: [
+                            "🚶 20 min incline walk (light pace)",
+                            "🏊 Swimming (if available)",
+                            "🏋️ Foam Rolling & Stretching"
+                        ]
+                    },
+                    {
+                        time: "✅ Night (Optional Bodyweight & Fun Work)",
+                        exercises: [
+                            "🏋️ Pull-Ups (3 x 10)",
+                            "🏋️ Hanging Knee Raises (3 x 15)",
+                            "🏋️ Push-Ups (3 x 15)"
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        function initializeApp() {
+            const workoutDays = document.getElementById('workoutDays');
+            
+            // Create workout day cards
+            workoutPlan.forEach(dayData => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day-card';
+                
+                dayElement.innerHTML = `
+                    <div class="day-header">
+                        <div class="color-code ${dayData.colorClass}"></div>
+                        ${dayData.day}
+                    </div>
+                    ${dayData.sessions.map(session => `
+                        <div class="session">
+                            <h3>${session.time}</h3>
+                            ${session.exercises.map(exercise => `
+                                <div class="exercise">
+                                    <input type="checkbox">
+                                    <span>${exercise}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `).join('')}
+                `;
+
+                workoutDays.appendChild(dayElement);
+            });
+
+            // Setup event listeners
+            setupCheckboxes();
+            setupNotes();
+            setupResetButton();
+            loadState();
+            updateProgress();
+        }
+
+        function setupCheckboxes() {
+            document.querySelectorAll('.exercise input').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    this.parentElement.classList.toggle('completed');
+                    updateProgress();
+                    saveState();
+                });
+            });
+        }
+
+        function setupNotes() {
+            const notesField = document.getElementById('workoutNotes');
+            const saveButton = document.getElementById('saveNotes');
+
+            // Load saved notes
+            notesField.value = localStorage.getItem('workoutNotes') || '';
+
+            // Save notes
+            saveButton.addEventListener('click', () => {
+                localStorage.setItem('workoutNotes', notesField.value);
+                alert('Notes saved successfully!');
+            });
+        }
+
+        function setupResetButton() {
+            document.getElementById('resetAll').addEventListener('click', () => {
+                if (confirm('Are you sure you want to reset all exercises?')) {
+                    document.querySelectorAll('.exercise input').forEach(checkbox => {
+                        checkbox.checked = false;
+                        checkbox.parentElement.classList.remove('completed');
+                    });
+                    updateProgress();
+                    saveState();
+                }
+            });
+        }
+
+        function updateProgress() {
+            const total = document.querySelectorAll('.exercise').length;
+            const completed = document.querySelectorAll('.completed').length;
+            const progress = (completed / total) * 100;
+            document.querySelector('.progress-fill').style.width = `${progress}%`;
+        }
+
+        function saveState() {
+            const states = [];
+            document.querySelectorAll('.exercise input').forEach(checkbox => {
+                states.push(checkbox.checked);
+            });
+            localStorage.setItem('workoutProgress', JSON.stringify(states));
+        }
+
+        function loadState() {
+            const savedState = JSON.parse(localStorage.getItem('workoutProgress'));
+            if (savedState) {
+                document.querySelectorAll('.exercise input').forEach((checkbox, index) => {
+                    checkbox.checked = savedState[index];
+                    if (savedState[index]) {
+                        checkbox.parentElement.classList.add('completed');
+                    }
+                });
+            }
+        }
+
+        // Start the app
+        initializeApp();
+    </script>
+</body>
+</html>
