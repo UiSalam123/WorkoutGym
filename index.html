@@ -180,173 +180,87 @@
     </div>
 
     <script>
-    const workoutPlan = [
+  const workoutPlan = [
     {
-        day: "🔴 Monday: Chest & Triceps",
-        colorClass: "monday",
+        day: "🔴 Day 1: Chest, Triceps (Morning) & Back, Biceps (Afternoon)",
+        colorClass: "day1",
         sessions: [
             {
-                time: "✅ Morning (Cardio & Light Activation)",
-                exercises: [
-                    "🚶 15 min treadmill incline walk (3.5 speed, 10-15 incline)",
-                    "🏋️ Single-Arm Cable Chest Fly (3 x 15, light weight)",
-                    "🏋️ Rope Triceps Pushdown (3 x 15, light weight)",
-                    "🏋️ Plank (3 x 30 sec)"
-                ]
-            },
-            {
-                time: "✅ Night (Heavy Lifting - Strength & Size)",
+                time: "✅ Morning: Chest & Triceps",
                 exercises: [
                     "🏋️ Barbell Bench Press (4 x 8-12)",
                     "🏋️ Incline Dumbbell Press (4 x 10)",
                     "🏋️ Chest Press Machine (3 x 12)",
-                    "🏋️ Triceps Dips (4 x 8-12)",
-                    "🏋️ Overhead Dumbbell Triceps Extension (4 x 12)"
-                ]
-            }
-        ]
-    },
-    {
-        day: "🟢 Tuesday: Back & Biceps",
-        colorClass: "tuesday",
-        sessions: [
-            {
-                time: "✅ Morning (Cardio & Mobility Work)",
-                exercises: [
-                    "🚴 15 min stationary bike (medium resistance)",
-                    "🏋️ Face Pulls (3 x 15, light weight)",
-                    "🏋️ Hanging Leg Raises (3 x 12)"
+                    "🏋️ Rope Triceps Pushdown (3 x 12-15)",
+                    "🏋️ Overhead Dumbbell Triceps Extension (3 x 12)"
                 ]
             },
             {
-                time: "✅ Night (Heavy Lifting - Strength & Size)",
+                time: "✅ Afternoon: Back & Biceps",
                 exercises: [
                     "🏋️ Lat Pulldown (4 x 8-12)",
-                    "🏋️ Seated Row (4 x 10)",
-                    "🏋️ Pull-Ups (4 x 6-12)",
-                    "🏋️ Dumbbell Bicep Curls (4 x 12-15)",
-                    "🏋️ Hammer Curls (4 x 10-12)"
+                    "🏋️ Seated Cable Row (4 x 10)",
+                    "🏋️ Pull-Ups (3 x 6-12)",
+                    "🏋️ Dumbbell Bicep Curls (3 x 12-15)",
+                    "🏋️ Hammer Curls (3 x 10-12)"
                 ]
             }
         ]
     },
     {
-        day: "🟡 Wednesday: Legs & Core",
-        colorClass: "wednesday",
+        day: "🟢 Day 2: Legs & Core (Morning) & Shoulders & Abs (Afternoon)",
+        colorClass: "day2",
         sessions: [
             {
-                time: "✅ Morning (Cardio & Mobility)",
+                time: "✅ Morning: Legs & Core",
                 exercises: [
-                    "🚶 15 min incline treadmill walk",
+                    "🏋️ Squats (4 x 8-12)",
+                    "🏋️ Leg Press (4 x 10)",
+                    "🏋️ Romanian Deadlifts (3 x 12)",
                     "🏋️ Hanging Leg Raises (3 x 12)",
                     "🏋️ Cable Woodchoppers (3 x 12 per side)"
                 ]
             },
             {
-                time: "✅ Night (Heavy Lifting - Leg Day)",
-                exercises: [
-                    "🏋️ Squats (4 x 8-12)",
-                    "🏋️ Leg Press (4 x 10)",
-                    "🏋️ Romanian Deadlifts (3 x 12)",
-                    "🏋️ Seated Leg Curl (3 x 12-15)",
-                    "🏋️ Calf Raises (3 x 15)"
-                ]
-            }
-        ]
-    },
-    {
-        day: "🔵 Thursday: Shoulders & Abs",
-        colorClass: "thursday",
-        sessions: [
-            {
-                time: "✅ Morning (Cardio & Activation Work)",
-                exercises: [
-                    "🚴 15 min stationary bike",
-                    "🏋️ Lateral Raises (3 x 15, light weight)",
-                    "🏋️ Russian Twists (3 x 15 per side)"
-                ]
-            },
-            {
-                time: "✅ Night (Heavy Shoulder Work)",
+                time: "✅ Afternoon: Shoulders & Abs",
                 exercises: [
                     "🏋️ Seated Shoulder Press (4 x 10)",
                     "🏋️ Arnold Press (4 x 12)",
-                    "🏋️ Reverse Pec Deck (4 x 12)",
-                    "🏋️ Shrugs (3 x 12)"
+                    "🏋️ Dumbbell Lateral Raises (3 x 12)",
+                    "🏋️ Hanging Knee Raises (3 x 15)",
+                    "🏋️ Russian Twists (3 x 15 per side)"
                 ]
             }
         ]
     },
     {
-        day: "🟠 Friday: Full Body Power & Explosiveness",
-        colorClass: "friday",
+        day: "🟡 Day 3: Full Body Power & Explosiveness (Morning) & Chest & Arms Pump (Afternoon)",
+        colorClass: "day3",
         sessions: [
             {
-                time: "✅ Morning (Cardio & Agility Work)",
-                exercises: [
-                    "🚶 10 min treadmill jog",
-                    "🏋️ Jump Rope (3 x 30 sec)",
-                    "🏋️ Battle Ropes (3 x 30 sec)"
-                ]
-            },
-            {
-                time: "✅ Night (Heavy Compound Movements)",
+                time: "✅ Morning: Full Body Power & Explosiveness",
                 exercises: [
                     "🏋️ Deadlifts (4 x 6-8)",
                     "🏋️ Kettlebell Swings (3 x 15)",
                     "🏋️ Sled Push (or Farmer’s Walk) (3 x 20m)",
                     "🏋️ Box Jumps (3 x 12)",
-                    "🏋️ Ab Rollouts (4 x 12)"
-                ]
-            }
-        ]
-    },
-    {
-        day: "🟣 Saturday: Arms & Chest Pump",
-        colorClass: "saturday",
-        sessions: [
-            {
-                time: "✅ Morning (Cardio & Light Work)",
-                exercises: [
-                    "🚴 15 min stationary bike",
-                    "🏋️ Preacher Curls (3 x 15, light)"
+                    "🏋️ Battle Ropes (3 x 30 sec)"
                 ]
             },
             {
-                time: "✅ Night (Heavy Isolation & Pump Focus)",
+                time: "✅ Afternoon: Chest & Arms Pump",
                 exercises: [
-                    "🏋️ Preacher Curls (4 x 12-15)",
-                    "🏋️ Triceps Kickbacks (4 x 12)",
                     "🏋️ Dumbbell Flys (3 x 12)",
                     "🏋️ Chest Press Machine (3 x 12-15)",
-                    "🏋️ Cable Crossovers (3 x 15)"
-                ]
-            }
-        ]
-    },
-    {
-        day: "🟤 Sunday: Active Recovery",
-        colorClass: "sunday",
-        sessions: [
-            {
-                time: "✅ Morning (Cardio & Recovery Work)",
-                exercises: [
-                    "🚶 20 min incline walk (light pace)",
-                    "🏊 Swimming (if available)",
-                    "🏋️ Foam Rolling & Stretching"
-                ]
-            },
-            {
-                time: "✅ Night (Optional Bodyweight & Fun Work)",
-                exercises: [
-                    "🏋️ Pull-Ups (3 x 10)",
-                    "🏋️ Hanging Knee Raises (3 x 15)",
-                    "🏋️ Push-Ups (3 x 15)"
+                    "🏋️ Preacher Curls (4 x 12-15)",
+                    "🏋️ Triceps Kickbacks (4 x 12)",
+                    "🏋️ Dumbbell Lateral Raises (3 x 12)"
                 ]
             }
         ]
     }
 ];
+
 
 
         function initializeApp() {
