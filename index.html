@@ -182,97 +182,50 @@
     <script>
 const workoutPlan = [
     {
-        day: "🔴 Day A: Upper Body (Chest, Back, Shoulders, Arms)",
-        colorClass: "day1",
+        day: "🔥 Full Body Day (Every Other Day)",
+        colorClass: "fullBody",
         sessions: [
             {
-                time: "✅ Morning Session",
+                time: "✅ Single Daily Session",
                 exercises: [
-                    "🏋️ Weighted Push-Up (4 x 5–10)",
-                    "🏋️ Incline Push-Up (3 x 5–10)",
-                    "🏋️ Decline Push-Up (3 x 5–10)",
-                    "🏋️ Shoulder Press (4 x 5–10)",
-                    "🏋️ Lateral Raise (3 x 10)",
-                    "🏋️ Face Pull (3 x 10)",
-                    "🏋️ Wide-Grip Lat Pulldown (4 x 5–10)",
-                    "🏋️ Cable Row (4 x 5–10)",
-                    "🏋️ Dumbbell Shrug (3 x 10)",
-                    "🏋️ Dumbbell Curl (4 x 6–10)",
-                    "🏋️ Hammer Curl (3 x 6–10)",
-                    "🏋️ Rope Triceps Pushdown (4 x 10)",
-                    "🏋️ Overhead Rope Extension (3 x 10)",
-                    "🏋️ Reverse Curl (2 x 10)"
-                ]
-            }
-        ]
-    },
-    {
-        day: "🟢 Day A: Lower Body + Core",
-        colorClass: "day2",
-        sessions: [
-            {
-                time: "✅ Evening Session",
-                exercises: [
-                    "🏋️ Leg Press (4 x 8–10)",
-                    "🏋️ Leg Extension (3 x 10)",
-                    "🏋️ Lying Leg Curl (3 x 10)",
-                    "🏋️ Deadlift (3 x 5–8)",
-                    "🏋️ Standing Calf Raise (4 x 10–12)",
-                    "🏋️ Russian Twist (3 x 15)",
-                    "🏋️ Ab Wheel Rollout (3 x 10)",
-                    "🏋️ Hanging Leg Raise (3 x 12)",
-                    "🏋️ Wrist Curl (4 x 12)"
-                ]
-            }
-        ]
-    },
-    {
-        day: "🟡 Day B: Upper Body (Chest, Back, Shoulders, Arms)",
-        colorClass: "day3",
-        sessions: [
-            {
-                time: "✅ Morning Session",
-                exercises: [
-                    "🏋️ Weighted Push-Up (4 x 5–10)",
-                    "🏋️ Regular Push-Up (3 x 5–10)",
-                    "🏋️ Incline Push-Up (3 x 5–10)",
-                    "🏋️ Shoulder Press (4 x 5–10)",
-                    "🏋️ Lateral Raise (3 x 10)",
-                    "🏋️ Face Pull (3 x 10)",
-                    "🏋️ Wide-Grip Lat Pulldown (3 x 5–10)",
-                    "🏋️ Cable Row (3 x 5–10)",
-                    "🏋️ Dumbbell Shrug (3 x 10)",
-                    "🏋️ Dumbbell Curl (4 x 6–10)",
-                    "🏋️ Hammer Curl (3 x 6–10)",
-                    "🏋️ Reverse Curl (2 x 10)",
-                    "🏋️ Rope Triceps Pushdown (4 x 10)",
-                    "🏋️ Overhead Rope Extension (3 x 10)"
-                ]
-            }
-        ]
-    },
-    {
-        day: "🔵 Day B: Lower Body + Core",
-        colorClass: "day4",
-        sessions: [
-            {
-                time: "✅ Evening Session",
-                exercises: [
-                    "🏋️ Leg Press (3 x 8–10)",
-                    "🏋️ Leg Extension (3 x 10)",
-                    "🏋️ Lying Leg Curl (3 x 10)",
-                    "🏋️ Deadlift (3 x 5–8)",
-                    "🏋️ Standing Calf Raise (4 x 10–12)",
-                    "🏋️ Russian Twist (3 x 15)",
-                    "🏋️ Ab Wheel Rollout (3 x 10)",
-                    "🏋️ Hanging Leg Raise (3 x 12)",
-                    "🏋️ Wrist Curl (4 x 12)"
+                    // Chest
+                    "🏋️ Incline Push-Up (3 x 10–15)",
+                    "🏋️ Decline Push-Up (3 x 10–15)",
+                    "🏋️ Regular Push-Up (4 x 10–15)",
+
+                    // Shoulders
+                    "🏋️ Dumbbell Shoulder Press (3 x 8–10)",
+                    "🏋️ Dumbbell Lateral Raise (3 x 12–15)",
+                    "🏋️ Dumbbell Reverse Fly (2 x 12–15)",
+                    "🏋️ Pike Push-Up (2 x 10)",
+
+                    // Back
+                    "🏋️ Dumbbell Row (4 x 8–10)",
+                    "🏋️ Dumbbell Shrug (3 x 12–15)",
+                    "🏋️ Dumbbell Romanian Deadlift (3 x 8–10)",
+
+                    // Arms
+                    "🏋️ Alternating Dumbbell Curl (3 x 10–12)",
+                    "🏋️ Hammer Curl (2 x 10–12)",
+                    "🏋️ Overhead Dumbbell Triceps Extension (3 x 10–12)",
+                    "🏋️ Close-Grip Push-Up (2 x 12)",
+
+                    // Calves
+                    "🏋️ Dumbbell Standing Calf Raise (4 x 15–20)",
+                    "🏋️ Seated Calf Raise (3 x 15)",
+                    "🏋️ Single-Leg Calf Raise (3 x 15)",
+
+                    // Abs
+                    "🏋️ Ab Wheel Rollout (3 x 8–10)",
+                    "🏋️ Weighted Sit-Up (2 x 12)",
+                    "🏋️ Reverse Crunch (2 x 15)",
+                    "🏋️ Russian Twist with Dumbbell (2 x 20 reps)",
+                    "🏋️ Plank Hold (1 x 60 sec)"
                 ]
             }
         ]
     }
 ];
-
 
         function initializeApp() {
             const workoutDays = document.getElementById('workoutDays');
